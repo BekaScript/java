@@ -131,9 +131,9 @@ public class StudentManagementSystem {
         sms.updateStudentData(325, 19);
 
         sms.updateStudentCourse(632, "Make-up");
-        sms.updateStudentCourse(325, "Boxing");
-        sms.updateStudentCourse(325, "Yoga");
-        sms.updateStudentCourse(325, "Boxing", "Dancing");
+        sms.updateStudentCourse(325, "Boxing"); //Just adds
+        sms.updateStudentCourse(325, "Yoga"); 
+        sms.updateStudentCourse(325, "Boxing", "Dancing"); //Changes boxing to dancing
 
         sms.displayStudentData(1093);
         sms.displayStudentData(325);
