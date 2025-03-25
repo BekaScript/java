@@ -1,0 +1,106 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class LambdaLearning {
+
+    interface MathOperations {
+        int operate(int a, int b);
+    }
+
+
+    public static void main(String[] args) {
+
+        //Calculator
+        {
+            MathOperations add = (a, b) -> a + b;
+            MathOperations subtract = (a, b) -> a - b;
+            MathOperations multiply = (a, b) -> a * b;
+            MathOperations divide = (a, b) -> {
+                if (b == 0) throw new ArithmeticException("Division by zero is not allowed");
+                else return a / b;
+            };
+        }
+
+        //Filter odd numbers
+        {
+            List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+            List<Integer> oddNumbers = new ArrayList<>();
+
+            Predicate<Integer> isOdd = number -> number % 2!= 0;
+
+            for(Integer number : numbers) {
+                if(isOdd.test(number)) {
+                    oddNumbers.add(number);
+                }
+            }
+        }
+
+        //Sort
+        {
+            List<String> names = Arrays.asList( "Bob", "David", "Alice","Charlie");
+            names.sort((a, b) -> a.compareTo(b));
+        }
+
+        //upper and reverse
+        {
+            List<String> strs = Arrays.asList("avaj", "si", "looc");
+            List<String> transformedStrs = new ArrayList<>();
+
+            Function<String, String> transform = str -> {
+                String upperStr = str.toUpperCase();
+
+                String reversedStr = "";
+
+                for (char c : upperStr.toCharArray()) {
+                    reversedStr = c + reversedStr;
+                }
+
+                return reversedStr;
+            };
+
+            for(String str : strs) {
+                transformedStrs.add(transform.apply(str));
+            }
+        }
+
+        //Consumer Lambda
+        {
+            List<String> cities = Arrays.asList("Toshkent", "Chimyon", "Halmion", "Vadil");
+
+            Consumer<String> printCityConsumer = city -> System.out.println(city);
+
+//            for (String c: cities) printCityConsumer.accept(c);
+        }
+
+        //Consumer Method Reference
+        {
+            List<String> cities = Arrays.asList("Toshkent", "Chimyon", "Halmion", "Vadil");
+
+            Consumer<String> printCityConsumer = System.out::println;
+
+//            for (String c: cities) printCityConsumer.accept(c);
+        }
+
+        //BiFunc
+        {
+            BiFunction<Integer,Integer,Integer> min = ((integer, integer2) -> {
+                return Math.min(integer,integer2);
+            });
+
+            BiFunction<Integer,Integer,Integer> max = ((integer, integer2) -> {
+                return Math.max(integer,integer2);
+            });
+
+            int a = 10; int b = 5;
+            System.out.println("MIN " + min.apply(a,b));
+            System.out.println("MAX " + max.apply(a,b));
+
+
+        }
+    }
+}
